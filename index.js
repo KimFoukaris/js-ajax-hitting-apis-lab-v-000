@@ -14,11 +14,12 @@ function displayRepositories(event, data) {
 }
 
 function getCommits(el) {
-  const name = el.dataset.repository
+  const name = el.dataset.username
+  const repo = el.dataset.repository
   console.log(name)
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
-  req.open("GET", 'https://api.github.com/repos/' + name + '/commits')
+  req.open("GET", 'https://api.github.com/repos/' + repo + '/' + name + '/commits')
   req.send()
 }
 
