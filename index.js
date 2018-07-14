@@ -9,12 +9,13 @@ function getRepositories() {
 function displayRepositories(event, data) {
   var repos = JSON.parse(this.responseText)
   console.log(repos)
-  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' <a href="' + r.html_url + '">' + r.html_url + '</a>' + ' - <a href="#" data-repository="' + r.full_name + '" onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`
+  const repoList = `<ul>${repos.map(r => '<li>' + r.name + ' <a href="' + r.html_url + '">' + r.html_url + '</a>' + ' - <a href="#" data-repository="' + r.name + '" data-username="' + r.owner.login + '" onclick="getCommits(this)">Get Commits</a></li>').join('')}</ul>`
   document.getElementById("repositories").innerHTML = repoList
 }
 
 function getCommits(el) {
   const name = el.dataset.repository
+  const username = el.dataset.username
   console.log(name)
   const req = new XMLHttpRequest()
   req.addEventListener("load", displayCommits)
